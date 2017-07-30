@@ -26,7 +26,7 @@ public class MenuController {
 	@RequestMapping(value = "/menu/cardapio", method = RequestMethod.GET)
 	public String listIngredients(Model model) {
 
-		model.addAttribute("ingredients", ingredientService.listAllIngredients());
+		model.addAttribute("ingredients", ingredientService.listDefaultAllIngredients());
 				
 		Iterable<Hamburguer> hamburguers = hamburguerService.listAllHamburguers();
 		

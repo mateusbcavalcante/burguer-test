@@ -53,16 +53,12 @@
 					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
-					<th>View</th>
-					<th>Edit</th>
 				</tr>
 				<tr th:each="ingredient : ${ingredients}">
 					<td th:text="${ingredient.id}"><a
 						href="/product/${product.id}">Id</a></td>
 					<td th:text="${ingredient.description}">Descrição</td>
-					<td th:text="${ingredient.price}">Preço</td>
-					<td><a th:href="${'/menu/ingredient' + ingredient.id}">View</a></td>
-					<td><a th:href="${'/menu/ingredient/edit/' + ingredient.id}">Edit</a></td>
+					<td th:text="${'R$: ' + ingredient.price}">Preço</td>
 				</tr>
 			</table>
 
@@ -72,13 +68,13 @@
 					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
-					<th>Edit</th>
+					<th>Editar Lanche</th>
 				</tr>
 				<tr th:each="hamburguer : ${burguers}">
 					<td th:text="${hamburguer.id}"><a
 						href="/product/${product.id}">Id</a></td>
 					<td th:text="${hamburguer.description}">Descrição</td>
-					<td th:text="${hamburguer.price}">Preço</td>
+					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>
 					<td>
 						<button
 							th:onclick="'javascript:openHamburguerEditModal(' + ${hamburguer.id} + ')'"
