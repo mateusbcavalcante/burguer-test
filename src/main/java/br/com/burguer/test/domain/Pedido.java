@@ -1,33 +1,29 @@
 package br.com.burguer.test.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
-public class Ingredient {
+public class Pedido {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
+	
 	@Version
 	private Integer version;
 
 	private String description;
 	
-	private BigDecimal price;	
-		
-	@ManyToOne
-	@JoinColumn(name = "hamburguer_id")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "pedido")
 	private Hamburguer hamburguer;
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -52,14 +48,6 @@ public class Ingredient {
 		this.description = description;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
 	public Hamburguer getHamburguer() {
 		return hamburguer;
 	}
@@ -67,5 +55,7 @@ public class Ingredient {
 	public void setHamburguer(Hamburguer hamburguer) {
 		this.hamburguer = hamburguer;
 	}
+
+	
 
 }

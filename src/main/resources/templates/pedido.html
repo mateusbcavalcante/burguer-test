@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+     <title>Pirates Burguer's</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(burguers)}">
+        <h2>Realizar Pedido</h2>
+        
+        <table id="postForm_realizarPedido">
+		  <tr><th>Lanches</th><th>Custo</th><th>Qtd</th></tr>
+		  <tr th:each="hamburguer : ${burguers}">	                
+	                <td th:text="${hamburguer.description}">Descrição</td>
+	                <td th:text="${hamburguer.price}">Preço</td>
+	                <td th:text="${hamburguer.qtd}">Qtd</td>
+	                <td th:input=""><img src="mAIS"/></td>	                
+	      </tr>
+		  
+		  	 
+		</table>
+        
+
+    </div>
+</div>
+
+</body>
+</html>

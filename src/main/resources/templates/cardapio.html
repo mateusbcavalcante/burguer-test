@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Pirates Burguer's</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> $("#hamburguerCardapioModal").html(data);/*/-->
+</head>
+<body>
+
+	<script type="text/javascript">
+		function openHamburguerEditModal(hamburguerId) {
+
+			$.ajax({
+				url : "/hamburguer/" + hamburguerId,
+				success : function(data) {
+					
+					$("#hamburguerEditModal").modal("show");
+				}
+			});
+
+		}
+
+		function openHamburguerEdit(hamburguerId) {
+
+			var htmlAppend;
+
+			$("#myModal").modal();
+			$("#myModalBody").text("");
+			$.ajax({
+				url : "/hamburguer/" + hamburguerId,
+				cache : false,
+				success : function(data) {
+
+					$.each(data, function(index, ingredient) {
+						htmlAppend = '<tr><td th:text="1"/> </tr>';
+						console.log(ingredient.description); //to print name of employee
+
+					});
+
+				}
+			}).done(function(html) {
+				$("#blabla").append(htmlAppend);
+			});
+		}
+	</script>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div th:if="${not #lists.isEmpty(ingredients)}">
+			<h2>Lista dos Ingredientes</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Descri&ccedil;&atilde;o</th>
+					<th>Pre&ccedil;o</th>
+					<th>View</th>
+					<th>Edit</th>
+				</tr>
+				<tr th:each="ingredient : ${ingredients}">
+					<td th:text="${ingredient.id}"><a
+						href="/product/${product.id}">Id</a></td>
+					<td th:text="${ingredient.description}">Descrição</td>
+					<td th:text="${ingredient.price}">Preço</td>
+					<td><a th:href="${'/menu/ingredient' + ingredient.id}">View</a></td>
+					<td><a th:href="${'/menu/ingredient/edit/' + ingredient.id}">Edit</a></td>
+				</tr>
+			</table>
+
+			<h2>Lista dos Hamburgueres</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Descri&ccedil;&atilde;o</th>
+					<th>Pre&ccedil;o</th>
+					<th>Edit</th>
+				</tr>
+				<tr th:each="hamburguer : ${burguers}">
+					<td th:text="${hamburguer.id}"><a
+						href="/product/${product.id}">Id</a></td>
+					<td th:text="${hamburguer.description}">Descrição</td>
+					<td th:text="${hamburguer.price}">Preço</td>
+					<td>
+						<button
+							th:onclick="'javascript:openHamburguerEditModal(' + ${hamburguer.id} + ')'"
+							class="btn btn-success btn-lg">Sign up</button>
+					</td>
+
+
+
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+	<div id="hamburguerCardapioModal">
+
+		<div id="hamburguerEditModal" class="modal fade" role="dialog"
+			th:fragment="modalHamburguerEditContents">
+
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h2>Lista dos Ingredientes</h2>
+						<table class="table table-striped">
+							<tr>
+								<th>Id</th>
+								<th>Descri&ccedil;&atilde;o</th>
+								<th>Pre&ccedil;o</th>
+								<th>View</th>
+								<th>Edit</th>
+							</tr>
+							<tr th:each="ingredient : ${ingredients}" id="ingredienteLista">
+								<td th:text="${ingredient.id}"><a
+									href="/product/${product.id}">Id</a></td>
+								<td th:text="${ingredient.description}">Descrição</td>
+								<td th:text="${ingredient.price}">Preço</td>
+								<td><a
+									th:href="${'/menu/ingredient/edit/' + ingredient.id}">Adicionar</a></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+
+		</div>
+		<!-- /.modal -->
+	</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -2,15 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-    <link href="../../static/css/burguer.css"
-          th:href="@{css/burguer.css}" rel="stylesheet" media="screen"/>
+  
+          
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -21,9 +18,8 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
                     <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/menu/ingredients}">Menu Ingredients</a></li>
-                        <li><a href="#" th:href="@{/menu/ingredients/new}">Create Ingredient</a></li>
-                        <li><a href="#" th:href="@{/menu}">Menu</a></li>
+                        <li><a href="#" th:href="@{/menu/cardapio}">Cárdapio</a></li>
+                        <li><a href="#" th:href="@{/pedido}">Realizar Pedido</a></li>
                     </ul>
 
                 </div>
@@ -32,8 +28,8 @@
 
         <div class="jumbotron">            
             <div class="row text-center">
-                <img src="../../static/images/home.png" width="400"
-                     th:src="@{/images/home.png}"/>
+                <img src="../../static/images/home-f.png" width="200"
+                     th:src="@{/images/home-f.png}"/>
             </div>
         </div>
     </div>

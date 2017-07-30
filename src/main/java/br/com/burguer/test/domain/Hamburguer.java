@@ -1,14 +1,17 @@
 package br.com.burguer.test.domain;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Version;
 
 @Entity
@@ -23,10 +26,21 @@ public class Hamburguer {
 
 	private String description;
 	
-	@OneToMany(mappedBy = "hamburguer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hamburguer")
 	private Set<Ingredient> ingredients;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Pedido pedido;
+	
+	
+	private int qtd = 0;
+	
+	
 	public Set<Ingredient> getIngredients() {
+		if(ingredients == null){
+			ingredients = new HashSet<Ingredient>();
+		}
 		return ingredients;
 	}
 
@@ -66,6 +80,22 @@ public class Hamburguer {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public int getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
 
 	
