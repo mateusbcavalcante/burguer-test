@@ -93,7 +93,6 @@ public class PiratesBurguerLoader implements ApplicationListener<ContextRefreshe
 
 		xburguer.getIngredients().add(hamburguerCarne);
 		xburguer.getIngredients().add(queijo);
-		xburguer.getIngredients().clear();
 		xburguer.getIngredients().forEach((ingredient) -> {
 
 			createHamburguerIngredient(xburguer, ingredient);

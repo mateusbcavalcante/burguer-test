@@ -24,23 +24,28 @@ public class HamburguerController {
 
 	@Autowired
 	private PedidoService pedidoService;
+	
+	private static final String RESULTS_FRAGMENT = "hamburguerEdit :: resultsList";
 
 	@RequestMapping(value = "/hamburguer/{id}", method = RequestMethod.GET, produces = "application/json")
 	public String listHamburguerIngredients2(@PathVariable Integer id, Model model) {
-		Iterable<Ingredient> bla = ingredientService.listAllIngredients();
-		model.addAttribute("ingredients", bla);
-		return "fragments/hamburguerEdit :: hamburguerEditModal";
+		Iterable<Ingredient> defaultIngredients = ingredientService.listDefaultAllIngredients();
+		model.addAttribute("hamburguerIngredients", defaultIngredients);
+		Hamburguer hamburguer = hamburguerService.findById(id);
+		model.addAttribute("hamburguerSelected", hamburguer);
+		return RESULTS_FRAGMENT;
 	}
 
-	@RequestMapping(value = "/hamburguer/ingredientes/add", method = RequestMethod.POST)
-	public String adicionaIngredientes(Model model) {
-		
-		Iterable<Hamburguer> hamburguers = hamburguerService.listAllHamburguers();
-		hamburguers.forEach(hamb -> hamb.setPrice(pedidoService.calculaPrecoFinal(hamb)));
-
-		model.addAttribute("burguers", hamburguers);
-
-		return "ok";
+	@RequestMapping(value = "/hamburguer/add/{hamburguerId}/{ingredientId}", method = RequestMethod.POST)
+	public String adicionaIngredientes(@PathVariable Integer hamburguerId, @PathVariable Integer ingredientId, Model model) {
+		hamburguerService.addIngredient(hamburguerId, ingredientId);
+		return "cardapio";
+	}
+	
+	@RequestMapping(value = "/hamburguer/remove/{hamburguerId}/{ingredientId}", method = RequestMethod.POST)
+	public String removeIngredientes(@PathVariable Integer hamburguerId, @PathVariable Integer ingredientId, Model model) {
+		hamburguerService.removeIngredient(hamburguerId, ingredientId);
+		return "cardapio";
 	}
 
 }

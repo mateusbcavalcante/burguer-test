@@ -11,4 +11,8 @@ public interface IngredientService {
 	
 	Set<Ingredient> listDefaultAllIngredients();
 
+	Iterable<Ingredient> findIngredientsByHamburguerId(Integer hamburguerId);
+
+	Ingredient findOne(Integer id);
+
 }

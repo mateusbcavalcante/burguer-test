@@ -24,23 +24,18 @@ public class PedidoController {
 	@RequestMapping(value = "/pedido", method = RequestMethod.GET)
 	public String listIngredients(Model model) {
 		Iterable<Hamburguer> hamburguers = hamburguerService.listAllHamburguers();
-		
 		hamburguers.forEach(hamb -> hamb.setPrice(pedidoService.calculaPrecoFinal(hamb)));
-		
 		model.addAttribute("burguers", hamburguers);
-
 		return "pedido";
 	}
 	
+	
+	
 	@RequestMapping(value = "/pedido/parte2", method = RequestMethod.GET)
 	public String listIa(Model model) {
-		Iterable<Hamburguer> hamburguers = hamburguerService.listAllHamburguers();
 		
-		hamburguers.forEach(hamb -> hamb.setPrice(pedidoService.calculaPrecoFinal(hamb)));
 		
-		model.addAttribute("burguers", hamburguers);
-
-		return "pedido";
+		return "";
 	}
 
 }

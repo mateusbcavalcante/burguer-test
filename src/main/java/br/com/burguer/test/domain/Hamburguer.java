@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -17,6 +16,21 @@ import javax.persistence.Version;
 
 @Entity
 public class Hamburguer {
+	
+	
+	public Hamburguer() {
+		
+	}
+	
+	public Hamburguer(String description, Set<Ingredient> ingredients, Integer qtd, BigDecimal price) {
+		setDescription(description);
+		setIngredients(ingredients);
+		setQtd(qtd);
+		setPrice(price);
+		setId(null);
+		setVersion(null);
+		setPedido(null);
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

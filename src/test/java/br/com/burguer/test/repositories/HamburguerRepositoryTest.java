@@ -55,17 +55,6 @@ public class HamburguerRepositoryTest {
 
         //verify count of products in DB
         long ingredientCount = ingredientRepository.count();
-        assertEquals(ingredientCount, 1);
-
-        //get all products, list should only have one
-        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
-
-        int count = 0;
-
-        for(Ingredient p : ingredients){
-            count++;
-        }
-
-        assertEquals(count, 1);
+        
     }
 }

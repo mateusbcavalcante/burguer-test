@@ -1,6 +1,7 @@
 package br.com.burguer.test.services;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,8 @@ public class PedidoServiceImpl implements PedidoService {
 
 	public BigDecimal calculaPrecoFinal(Hamburguer hamburguer) {
 
-		if (hamburguer != null) {
+		try {
+
 			Double finalPrice = hamburguer.getIngredients().stream()
 					.mapToDouble(ingredient -> ingredient.getPrice().doubleValue()).sum();
 
@@ -31,10 +33,12 @@ public class PedidoServiceImpl implements PedidoService {
 			if (lightPromocao(hamburguer)) {
 				finalPrice = finalPrice - (finalPrice * 0.1);
 			}
+			BigDecimal finalPriceBD = new BigDecimal(finalPrice);
+			finalPriceBD = finalPriceBD.setScale(2, RoundingMode.HALF_UP);
+			return finalPriceBD;
 
-			return new BigDecimal(finalPrice);
-		} else {
-			throw new PirateBurguerException("Não foi possivel calcular o preço final do hamburguer.");
+		} catch (NullPointerException e) {
+			throw new PirateBurguerException("Não foi possivel calcular o preço final do hamburguer. Não foi passado o hamburguer como instancia para o método.");
 		}
 	}
 
@@ -51,11 +55,10 @@ public class PedidoServiceImpl implements PedidoService {
 		if (ingredientes.iterator().hasNext()) {
 			Ingredient ing = ingredientes.iterator().next();
 			return new BigDecimal(ing.getPrice().doubleValue() * valorADescontar);
-		}else{
+		} else {
 			return new BigDecimal(BigDecimal.ZERO.doubleValue());
 		}
 
-		
 	}
 
 	private int regraDe3(Set<Ingredient> ingredientes) {
@@ -65,8 +68,6 @@ public class PedidoServiceImpl implements PedidoService {
 			return ingredientes.size() / 3;
 		}
 	}
-
-	
 
 	public boolean lightPromocao(Hamburguer hamburguer) {
 
@@ -82,7 +83,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 	private boolean verificaSeHaIngrediente(Hamburguer hamburguer, String ingredientDescription) {
 		Ingredient ingredient = hamburguer.getIngredients().stream()
-				.filter(in -> "ingredientDescription".equals(in.getDescription())).findAny().orElse(null);
+				.filter(in -> ingredientDescription.equals(in.getDescription())).findAny().orElse(null);
 		if (ingredient != null) {
 			return true;
 		} else {

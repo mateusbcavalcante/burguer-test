@@ -4,44 +4,58 @@
 
 <title>Pirates Burguer's</title>
 
-<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> $("#hamburguerCardapioModal").html(data);/*/-->
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block>/*/-->
 </head>
 <body>
 
 	<script type="text/javascript">
-		function openHamburguerEditModal(hamburguerId) {
+		function retrieveHamburguerEdit(hamburguerId) {
+			var url = '/hamburguer';
+
+			if (hamburguerId != '') {
+				url = url + '/' + hamburguerId;
+			}
 
 			$.ajax({
-				url : "/hamburguer/" + hamburguerId,
+				url : url,
 				success : function(data) {
-					
-					$("#hamburguerEditModal").modal("show");
+
+					$('#resultsBlock').html(data);
+					$("#myModal").modal("show");
 				}
 			});
 
 		}
 
-		function openHamburguerEdit(hamburguerId) {
+		$("#myModal").on('hide', function() {
+			console.log('closing');
 
-			var htmlAppend;
+		});
 
-			$("#myModal").modal();
-			$("#myModalBody").text("");
+		function addIngredientHamburguerAjaxPost(hamburguerId, ingredientId) {
+
 			$.ajax({
-				url : "/hamburguer/" + hamburguerId,
-				cache : false,
+				type : "POST",
+				url : "/hamburguer/add/" + hamburguerId + "/" + ingredientId,
 				success : function(data) {
-
-					$.each(data, function(index, ingredient) {
-						htmlAppend = '<tr><td th:text="1"/> </tr>';
-						console.log(ingredient.description); //to print name of employee
-
-					});
-
+					console.log('sucess');
+					window.location.reload();
 				}
-			}).done(function(html) {
-				$("#blabla").append(htmlAppend);
 			});
+
+		}
+		
+		function removeIngredientHamburguerAjaxPost(hamburguerId, ingredientId) {
+
+			$.ajax({
+				type : "POST",
+				url : "/hamburguer/remove/" + hamburguerId + "/" + ingredientId,
+				success : function(data) {
+					console.log('sucess');
+					window.location.reload();
+				}
+			});
+
 		}
 	</script>
 	<div class="container">
@@ -77,67 +91,24 @@
 					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>
 					<td>
 						<button
-							th:onclick="'javascript:openHamburguerEditModal(' + ${hamburguer.id} + ')'"
-							class="btn btn-success btn-lg">Sign up</button>
+							th:onclick="'javascript:retrieveHamburguerEdit(' + ${hamburguer.id} + ')'"
+							class="btn btn-success btn-lg">Editar</button>
 					</td>
-
-
-
 				</tr>
 			</table>
 
 		</div>
 	</div>
 
-	<div id="hamburguerCardapioModal">
+	<!-- Guests list -->
+	<form>
+		<span class="subtitle">Form</span>
 
-		<div id="hamburguerEditModal" class="modal fade" role="dialog"
-			th:fragment="modalHamburguerEditContents">
-
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<h2>Lista dos Ingredientes</h2>
-						<table class="table table-striped">
-							<tr>
-								<th>Id</th>
-								<th>Descri&ccedil;&atilde;o</th>
-								<th>Pre&ccedil;o</th>
-								<th>View</th>
-								<th>Edit</th>
-							</tr>
-							<tr th:each="ingredient : ${ingredients}" id="ingredienteLista">
-								<td th:text="${ingredient.id}"><a
-									href="/product/${product.id}">Id</a></td>
-								<td th:text="${ingredient.description}">Descrição</td>
-								<td th:text="${ingredient.price}">Preço</td>
-								<td><a
-									th:href="${'/menu/ingredient/edit/' + ingredient.id}">Adicionar</a></td>
-							</tr>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-
-		</div>
-		<!-- /.modal -->
-	</div>
+		<!-- Results block -->
+		<div id="resultsBlock"></div>
 
 
-
-
-
-
-
+	</form>
 
 </body>
 </html>
