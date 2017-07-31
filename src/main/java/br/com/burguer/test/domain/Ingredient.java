@@ -88,6 +88,9 @@ public class Ingredient {
 	}
 
 	public Boolean isDefaultIngredient() {
+		if(defaultIngredient == null) {
+			return false;
+		}
 		return defaultIngredient;
 	}
 
