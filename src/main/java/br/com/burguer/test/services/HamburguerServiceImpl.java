@@ -38,7 +38,7 @@ public class HamburguerServiceImpl implements HamburguerService {
 		Ingredient newIng = new Ingredient(ingredient);
 		newIng.setHamburguer(hamburguer);
 
-		newIng = ingredientRepository.save(newIng);
+		ingredientRepository.save(newIng);
 
 		return hamburguer;
 	}

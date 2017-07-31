@@ -27,9 +27,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 			BigDecimal descontoMuitoQueijo = descontoMuito(hamburguer, "Queijo");
 			BigDecimal descontoMuitaCarne = descontoMuito(hamburguer, "Hambúrguer de carne");
-			finalPrice = new BigDecimal(
-					finalPrice.doubleValue() - descontoMuitaCarne.doubleValue() - descontoMuitoQueijo.doubleValue())
-							.doubleValue();
+			finalPrice = BigDecimal.valueOf(finalPrice.doubleValue() - descontoMuitaCarne.doubleValue() - descontoMuitoQueijo.doubleValue()).doubleValue();
 			if (lightPromocao(hamburguer)) {
 				finalPrice = finalPrice - (finalPrice * 0.1);
 			}
@@ -54,9 +52,9 @@ public class PedidoServiceImpl implements PedidoService {
 		int valorADescontar = regraDe3(ingredientes);
 		if (ingredientes.iterator().hasNext()) {
 			Ingredient ing = ingredientes.iterator().next();
-			return new BigDecimal(ing.getPrice().doubleValue() * valorADescontar);
+			return BigDecimal.valueOf(ing.getPrice().doubleValue() * valorADescontar);
 		} else {
-			return new BigDecimal(BigDecimal.ZERO.doubleValue());
+			return BigDecimal.valueOf(BigDecimal.ZERO.doubleValue());
 		}
 
 	}

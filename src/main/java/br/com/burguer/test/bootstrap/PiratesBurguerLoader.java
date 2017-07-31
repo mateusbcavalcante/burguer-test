@@ -2,7 +2,6 @@ package br.com.burguer.test.bootstrap;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -21,8 +20,6 @@ public class PiratesBurguerLoader implements ApplicationListener<ContextRefreshe
 
 	@Autowired
 	private HamburguerRepository hamburguerRepository;
-
-	private Logger log = Logger.getLogger(PiratesBurguerLoader.class);
 
 	private static final BigDecimal ALFACE_DEFAULT_VALUE = new BigDecimal("0.40");
 	private static final BigDecimal QUEIJO_DEFAULT_VALUE = new BigDecimal("1.50");

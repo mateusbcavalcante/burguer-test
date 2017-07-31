@@ -11,7 +11,6 @@ import br.com.burguer.test.domain.Hamburguer;
 import br.com.burguer.test.domain.Ingredient;
 import br.com.burguer.test.services.HamburguerService;
 import br.com.burguer.test.services.IngredientService;
-import br.com.burguer.test.services.PedidoService;
 
 @Controller
 public class HamburguerController {
@@ -22,9 +21,6 @@ public class HamburguerController {
 	@Autowired
 	private IngredientService ingredientService;
 
-	@Autowired
-	private PedidoService pedidoService;
-	
 	private static final String RESULTS_FRAGMENT = "hamburguerEdit :: resultsList";
 
 	@RequestMapping(value = "/hamburguer/{id}", method = RequestMethod.GET, produces = "application/json")
