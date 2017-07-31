@@ -27,7 +27,9 @@ public class PedidoServiceImpl implements PedidoService {
 
 			BigDecimal descontoMuitoQueijo = descontoMuito(hamburguer, "Queijo");
 			BigDecimal descontoMuitaCarne = descontoMuito(hamburguer, "Hambúrguer de carne");
-			finalPrice = BigDecimal.valueOf(finalPrice.doubleValue() - descontoMuitaCarne.doubleValue() - descontoMuitoQueijo.doubleValue()).doubleValue();
+			finalPrice = BigDecimal.valueOf(
+					finalPrice.doubleValue() - descontoMuitaCarne.doubleValue() - descontoMuitoQueijo.doubleValue())
+					.doubleValue();
 			if (lightPromocao(hamburguer)) {
 				finalPrice = finalPrice - (finalPrice * 0.1);
 			}
@@ -36,14 +38,15 @@ public class PedidoServiceImpl implements PedidoService {
 			return finalPriceBD;
 
 		} catch (NullPointerException e) {
-			throw new PirateBurguerException("Não foi possivel calcular o preço final do hamburguer. Não foi passado o hamburguer como instancia para o método.");
+			throw new PirateBurguerException(
+					"Não foi possivel calcular o preço final do hamburguer. Não foi passado o hamburguer como instancia para o método.");
 		}
 	}
 
 	public BigDecimal descontoMuito(Hamburguer hamburguer, String ingredientDescription) {
 
-		Set<Ingredient> ingredientes = new HashSet<Ingredient>();
-		hamburguer.getIngredients().forEach((ingredient) -> {
+		Set<Ingredient> ingredientes = new HashSet<>();
+		hamburguer.getIngredients().forEach(ingredient -> {
 			if (ingredientDescription.equals(ingredient.getDescription())) {
 				ingredientes.add(ingredient);
 			}
@@ -53,9 +56,9 @@ public class PedidoServiceImpl implements PedidoService {
 		if (ingredientes.iterator().hasNext()) {
 			Ingredient ing = ingredientes.iterator().next();
 			return BigDecimal.valueOf(ing.getPrice().doubleValue() * valorADescontar);
-		} else {
-			return BigDecimal.valueOf(BigDecimal.ZERO.doubleValue());
 		}
+
+		return BigDecimal.valueOf(BigDecimal.ZERO.doubleValue());
 
 	}
 
@@ -72,11 +75,8 @@ public class PedidoServiceImpl implements PedidoService {
 		boolean hasBacon = verificaSeHaIngrediente(hamburguer, "Bacon");
 		boolean hasAlface = verificaSeHaIngrediente(hamburguer, "Alface");
 
-		if (hasAlface && !hasBacon) {
-			return true;
-		}
+		return hasAlface && !hasBacon;
 
-		return false;
 	}
 
 	private boolean verificaSeHaIngrediente(Hamburguer hamburguer, String ingredientDescription) {

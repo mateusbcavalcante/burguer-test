@@ -26,6 +26,24 @@
 			});
 
 		}
+		
+		function retrieveIngredientEdit(hamburguerId) {
+			var url = '/hamburguer';
+
+			if (hamburguerId != '') {
+				url = url + '/' + hamburguerId;
+			}
+
+			$.ajax({
+				url : url,
+				success : function(data) {
+
+					$('#resultsBlock').html(data);
+					$("#myModal").modal("show");
+				}
+			});
+
+		}
 
 		$("#myModal").on('hide', function() {
 			console.log('closing');
@@ -44,17 +62,19 @@
 			});
 
 		}
-		
+
 		function removeIngredientHamburguerAjaxPost(hamburguerId, ingredientId) {
 
-			$.ajax({
-				type : "POST",
-				url : "/hamburguer/remove/" + hamburguerId + "/" + ingredientId,
-				success : function(data) {
-					console.log('sucess');
-					window.location.reload();
-				}
-			});
+			$
+					.ajax({
+						type : "POST",
+						url : "/hamburguer/remove/" + hamburguerId + "/"
+								+ ingredientId,
+						success : function(data) {
+							console.log('sucess');
+							window.location.reload();
+						}
+					});
 
 		}
 	</script>
@@ -67,12 +87,19 @@
 					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
+					<th>Editar Preço</th>
 				</tr>
 				<tr th:each="ingredient : ${ingredients}">
 					<td th:text="${ingredient.id}"><a
 						href="/product/${product.id}">Id</a></td>
 					<td th:text="${ingredient.description}">Descrição</td>
 					<td th:text="${'R$: ' + ingredient.price}">Preço</td>
+				
+					<td>
+						<button
+							th:onclick="'javascript:retrieveHamburguerEdit(' + ${hamburguer.id} + ')'"
+							class="btn btn-success btn-lg">Editar</button>
+					</td>
 				</tr>
 			</table>
 

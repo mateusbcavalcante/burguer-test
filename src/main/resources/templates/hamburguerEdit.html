@@ -18,9 +18,8 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" th:text="${hamburguerSelected.description}"></h4>
-						<h5 th:text="${hamburguerSelected.id}"></h5>
-						
+						<h4 class="modal-title"
+							th:text="${hamburguerSelected.description}"></h4>
 					</div>
 					<div class="modal-body">
 						<table class="table table-striped">
@@ -29,18 +28,18 @@
 								<th>Pre&ccedil;o</th>
 							</tr>
 							<tr th:each="ingredient : ${hamburguerIngredients}">
-								
+
 								<td th:text="${ingredient.description}">Descrição</td>
 								<td th:text="${'R$: ' + ingredient.price}">Preço</td>
 								<td>
-									<button										
+									<button
 										th:onclick="'javascript:addIngredientHamburguerAjaxPost(' + ${hamburguerSelected.id} + ',' + ${ingredient.id} + ')'"
 										class="btn btn-success btn-lg">Adicionar</button>
 
 								</td>
-								
+
 								<td>
-									<button										
+									<button
 										th:onclick="'javascript:removeIngredientHamburguerAjaxPost(' + ${hamburguerSelected.id} + ',' + ${ingredient.id} + ')'"
 										class="btn btn-error btn-lg">Remover</button>
 
