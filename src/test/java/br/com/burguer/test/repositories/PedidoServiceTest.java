@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.burguer.test.configuration.RepositoryConfiguration;
 import br.com.burguer.test.domain.Hamburguer;
 import br.com.burguer.test.domain.Ingredient;
+import br.com.burguer.test.exception.PirateBurguerException;
 import br.com.burguer.test.services.PedidoService;
 import br.com.burguer.test.services.PedidoServiceImpl;
 
@@ -285,7 +286,7 @@ public class PedidoServiceTest {
 
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = PirateBurguerException.class)
 	public void testException() {
 		pedidoService().calculaPrecoFinal(null);
 	}
