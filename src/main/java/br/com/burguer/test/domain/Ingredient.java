@@ -23,12 +23,6 @@ public class Ingredient {
 		setPrice(ingredient.getPrice());
 		setDefaultIngredient(false);
 	}
-	
-	public Ingredient(String description, BigDecimal price) {
-		setDescription(description);
-		setPrice(price);
-		setDefaultIngredient(false);
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

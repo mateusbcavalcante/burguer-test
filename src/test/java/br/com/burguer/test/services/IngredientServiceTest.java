@@ -1,4 +1,4 @@
-package br.com.burguer.test.repositories;
+package br.com.burguer.test.services;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -22,7 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.burguer.test.configuration.RepositoryConfiguration;
 import br.com.burguer.test.domain.Hamburguer;
 import br.com.burguer.test.domain.Ingredient;
-import br.com.burguer.test.services.IngredientServiceImpl;
+import br.com.burguer.test.repositories.HamburguerRepository;
+import br.com.burguer.test.repositories.IngredientRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { RepositoryConfiguration.class })

@@ -1,4 +1,4 @@
-package br.com.burguer.test.repositories;
+package br.com.burguer.test.services;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,8 +16,8 @@ import br.com.burguer.test.configuration.RepositoryConfiguration;
 import br.com.burguer.test.domain.Hamburguer;
 import br.com.burguer.test.domain.Ingredient;
 import br.com.burguer.test.exception.PirateBurguerException;
-import br.com.burguer.test.services.PedidoService;
-import br.com.burguer.test.services.PedidoServiceImpl;
+import br.com.burguer.test.repositories.HamburguerRepository;
+import br.com.burguer.test.repositories.IngredientRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { RepositoryConfiguration.class })
