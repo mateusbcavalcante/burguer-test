@@ -1,6 +1,7 @@
 #Burguer Test App
 
-Travis CI
+Travis CI for this code (Sonar and compile)
+Como ambiente de CI, escolhi dois serviços da nuvem como o Travis e o Sonar IO.
 
 Build Status ![alt text](https://travis-ci.org/mateuscoradini/burguer-test.svg?branch=master)
 
@@ -13,7 +14,11 @@ https://sonarcloud.io/dashboard?id=br.com.burguer.test%3Aburguer-test
 mvn clean install
 
 <h1> Execute </h1>
-run
+java -jar target/burguer-test-0.0.1-SNAPSHOT.jar
+or
+mvn spring-boot:run
+
+See: https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html
 
 
 <h2> A spring boot web application, based on a simple hamburger shop model</h2>
@@ -28,18 +33,26 @@ Então iniciei esse projeto como prototipação do negócio e estudo do framewor
   - Base em memória, usando H2
   
 
-- Negocio proposto
-Especialidade de venda de lanches
+- Regras de negocio proposto como modelo, especialidade de venda de lanches.
 
-- Inicialização de carga inicial com os lanches e ingredientes padrões
-  PiratesBurguerLoader.java
-
-
-- Regras Implementadas e teste unitários
+	- Inicialização de carga inicial com os lanches e ingredientes padrões PiratesBurguerLoader.java
+	- Regras Implementadas e teste unitários
 		- Valor dos lanches de cardápio e soma dos ingredientes que compõe o lanche, PedidoServiceTest.testPriceFinal.class
 		- Promoção Light PedidoServiceTest.testPriceFinalDesconto10.class
 		- Promoção Muito Queijo PedidoServiceTest.testPriceFinalComMuitoQueijo.class
 		- Promoção Muitar Carne PedidoServiceTest.testPriceFinalComMuitaCarne.class
+		
+		
+
+		
+#Bugs to fix
+
+ - List default hamburguer cart - Precisa de tratamento na lista de hamburguers padrões que esta salvando como alteração após inserir ingrediente.
+ - Edit ingredient value front end page - Necessita de um tratamento para enviar ao controler as informações para editar e salvar o valor do ingrediente a ser editado.
+ - Layout CSS - Necessita de um tratamento para estilizar melhor a página, por enquanto encontra-se despadronizada.
+ - Sonar code quality - Necessita de tratamento para garantir a qualidade de código acima de 80% de cobertura e tratamento das issues geradas.
+ - Refresh Lists - Necessita de tratamento no front para garantir a maneira correta de realizar o refresh após a requisição ajax.
+ 
  
 
 
