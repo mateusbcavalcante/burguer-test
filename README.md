@@ -2,8 +2,7 @@
 
 Travis CI
 
-<h5> Build Status: </h5>
-![alt text](https://travis-ci.org/mateuscoradini/burguer-test.svg?branch=master)
+Build Status ![alt text](https://travis-ci.org/mateuscoradini/burguer-test.svg?branch=master)
 
 <h5> Sonar Status: </h5>
 https://sonarcloud.io/dashboard?id=br.com.burguer.test%3Aburguer-test
