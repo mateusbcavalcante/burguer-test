@@ -78,7 +78,7 @@ public class IngredientServiceTest {
 		
 		
 		Mockito.when(hamburguerRepository.findOne(1)).thenReturn(hamburguer);
-		assertNotNull(ingredientServiceImpl.findIngredientsByHamburguerId(1));
+		assertNotNull(ingredientServiceImpl.listAllIngredientsByHamburguerId(1));
 	}
 	
 	@Test

@@ -2,53 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-     <title>Pirates Burguer's</title>
+<title>Pirates Burguer's</title>
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
-<div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <div th:if="${not #lists.isEmpty(burguers)}">
-        <h2>Escolha um dos Hamburgueres</h2>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div th:if="${not #lists.isEmpty(burguers)}">
+			<h2>Escolha um dos Hamburgueres</h2>
+			<h2>Lista dos Hamburgueres</h2>
 			<table class="table table-striped">
 				<tr>
-					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
-					<th>Adicionar</th>
+					<th>Editar Lanche</th>
+					<th>Adicionar ao Carrinho</th>
 				</tr>
 				<tr th:each="hamburguer : ${burguers}">
-					<td th:text="${hamburguer.id}"><a
-						href="/product/${product.id}">Id</a></td>
 					<td th:text="${hamburguer.description}">Descrição</td>
 					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>
 					<td>
 						<button
-							th:onclick="'javascript:retrieveHamburguer(' + ${hamburguer.id} + ')'"
-							class="btn btn-success btn-lg">Adicionar</button>
+							th:onclick="'javascript:retrieveHamburguerEdit(' + ${hamburguer.id} + ')'"
+							class="btn btn-success btn-lg">Editar</button>
+					</td>
+					<td>
+						<button
+							th:onclick="'javascript:addHamburguerToCart(' + ${hamburguer.id} + ')'"
+							class="fa fa-shopping-cart">Adicionar</button>
 					</td>
 				</tr>
 			</table>
-			
+		</div>
+
+		<div>
 			<h2>Hamburgueres escolhidos</h2>
 			<table class="table table-striped">
 				<tr>
-					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
 				</tr>
-				<tr th:each="hamburguer : ${selectedBurguers}">
-					<td th:text="${hamburguer.id}"><a
-						href="/product/${product.id}">Id</a></td>
+				<tr th:each="hamburguer : ${hamburguersCartList}">
 					<td th:text="${hamburguer.description}">Descrição</td>
-					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>					
+					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>
+					<td>
+						<button
+							th:onclick="'javascript:removeHamburguerToCart(' + ${hamburguer.temporaryId} + ')'"
+							class="fa fa-shopping-cart">Remover</button>
+					</td>
 				</tr>
 			</table>
-        
+		</div>
+		
+		<div>
+			<h1 th:text="${'R$: ' + totalPrice}">Preço Total</h1>
+			
+		</div>
+		
+		
+	</div>
 
-    </div>
-</div>
+	<div>
+		
+		<form>
+			<!-- Results block -->
+			<div id="resultsBlock"></div>
+		</form>
+	</div>
 
 </body>
 </html>

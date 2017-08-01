@@ -36,6 +36,8 @@ public class Hamburguer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	private Integer temporaryId;
+	
 	@Version
 	private Integer version;
 
@@ -111,6 +113,14 @@ public class Hamburguer {
 
 	public void setQtd(int qtd) {
 		this.qtd = qtd;
+	}
+
+	public Integer getTemporaryId() {
+		return temporaryId;
+	}
+
+	public void setTemporaryId(Integer temporaryId) {
+		this.temporaryId = temporaryId;
 	}
 
 	

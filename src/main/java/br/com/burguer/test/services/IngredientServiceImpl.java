@@ -51,7 +51,7 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
-	public Iterable<Ingredient> findIngredientsByHamburguerId(Integer hamburguerId) {
+	public Iterable<Ingredient> listAllIngredientsByHamburguerId(Integer hamburguerId) {
 		Hamburguer hamburguer = hamburguerRepository.findOne(hamburguerId);
 		return ingredientRepository.findByHamburguer(hamburguer);
 	}

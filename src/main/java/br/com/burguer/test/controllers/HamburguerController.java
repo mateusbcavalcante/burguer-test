@@ -23,14 +23,17 @@ public class HamburguerController {
 
 	private static final String RESULTS_FRAGMENT = "hamburguerEdit :: resultsList";
 
-	@RequestMapping(value = "/hamburguer/{id}", method = RequestMethod.GET, produces = "application/json")
-	public String listHamburguerIngredients(@PathVariable Integer id, Model model) {
-		Iterable<Ingredient> defaultIngredients = ingredientService.listDefaultAllIngredients();
-		model.addAttribute("hamburguerIngredients", defaultIngredients);
-		Hamburguer hamburguer = hamburguerService.findById(id);
-		model.addAttribute("hamburguerSelected", hamburguer);
-		return RESULTS_FRAGMENT;
-	}
+//	@RequestMapping(value = "/hamburguer/{id}", method = RequestMethod.GET, produces = "application/json")
+//	public String listHamburguerIngredients(@PathVariable Integer id, Model model) {
+//		Iterable<Ingredient> defaultIngredients = ingredientService.listDefaultAllIngredients();
+//		Iterable<Ingredient> hamburguerIngredients = ingredientService.listAllIngredientsByHamburguerId(id);
+//		
+//		model.addAttribute("allDefaultIngredients", defaultIngredients);
+//		model.addAttribute("hamburguerIngredients", hamburguerIngredients);
+//		Hamburguer hamburguer = hamburguerService.findById(id);
+//		model.addAttribute("hamburguerSelected", hamburguer);
+//		return RESULTS_FRAGMENT;
+//	}
 
 	@RequestMapping(value = "/hamburguer/add/{hamburguerId}/{ingredientId}", method = RequestMethod.POST)
 	public String adicionaIngredientes(@PathVariable Integer hamburguerId, @PathVariable Integer ingredientId, Model model) {

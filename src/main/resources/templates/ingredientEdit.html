@@ -21,7 +21,7 @@
 					</div>
 
 					<div class="modal-body">
-						<form id="ingredientEditForm" action="/ingredient/edit/" th:object="${ingredientSelected}" method="post">
+						<form id="ingredientEditForm" action="#" th:action="@{/ingredient/edit/}" th:object="${ingredientSelected}" method="post">
 							<table class="table table-striped">
 								<tr>
 									<th>Descri&ccedil;&atilde;o</th>
@@ -31,7 +31,7 @@
 
 									<td th:text="${ingredientSelected.description}">Descrição</td>
 									<td><input type="text" id="ingredientPriceId"
-										name="ingredientPrice" th:value="${ingredientSelected.price}" /></td>
+										name="ingredientPrice" th:value="${ingredientSelected.price}" th:field="${ingredientSelected.price}" /></td>
 									<td>
 										<button type="submit" class="btn btn-success btn-lg">Alterar</button>
 

@@ -31,12 +31,7 @@
 
 								<td th:text="${ingredient.description}">Descrição</td>
 								<td th:text="${'R$: ' + ingredient.price}">Preço</td>
-								<td>
-									<button
-										th:onclick="'javascript:addIngredientHamburguerAjaxPost(' + ${hamburguerSelected.id} + ',' + ${ingredient.id} + ')'"
-										class="btn btn-success btn-lg">Adicionar</button>
-
-								</td>
+								
 
 								<td>
 									<button
@@ -46,6 +41,15 @@
 								</td>
 							</tr>
 						</table>
+						<div>
+							<select id="ingredienteSelecionado">
+								<option th:each="i : ${allDefaultIngredients}"
+									th:value="${i.id}" th:text="${i.description}"></option>
+							</select>
+							<button
+								th:onclick="'javascript:addIngredientHamburguerAjaxPost(' + ${hamburguerSelected.id}  + ')'"
+								class="btn btn-success btn-lg">Adicionar</button>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
