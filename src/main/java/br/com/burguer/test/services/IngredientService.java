@@ -14,5 +14,10 @@ public interface IngredientService {
 	Iterable<Ingredient> findIngredientsByHamburguerId(Integer hamburguerId);
 
 	Ingredient findOne(Integer id);
+	
+	
+	void editIngredientPrice(Integer ingredientId, String value);
+	
+	Iterable<Ingredient> findByDescription(String description);
 
 }

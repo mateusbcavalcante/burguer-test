@@ -12,5 +12,7 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Integer
 	
 	
 	Set<Ingredient> findByHamburguer(Hamburguer hamburguer);
+	
+	Set<Ingredient> findByDescription(String description);
 
 }

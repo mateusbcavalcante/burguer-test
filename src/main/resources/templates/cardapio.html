@@ -26,12 +26,12 @@
 			});
 
 		}
-		
-		function retrieveIngredientEdit(hamburguerId) {
-			var url = '/hamburguer';
 
-			if (hamburguerId != '') {
-				url = url + '/' + hamburguerId;
+		function editIngredientPriceAjaxPost(ingredientId) {
+			var url = '/ingredient';
+
+			if (ingredientId != '') {
+				url = url + '/' + ingredientId;
 			}
 
 			$.ajax({
@@ -39,7 +39,7 @@
 				success : function(data) {
 
 					$('#resultsBlock').html(data);
-					$("#myModal").modal("show");
+					$("#myModalIngredient").modal("show");
 				}
 			});
 
@@ -63,10 +63,22 @@
 
 		}
 
+		function submitIngredientPriceAjaxPost(ingredientId, priceValue) {
+
+			$.ajax({
+				type : "POST",
+				url : "/ingredient/edit/" + ingredientId + "/" +priceValue ,
+				success : function(data) {
+					console.log('sucess');
+					window.location.reload();
+				}
+			});
+
+		}
+
 		function removeIngredientHamburguerAjaxPost(hamburguerId, ingredientId) {
 
-			$
-					.ajax({
+			$.ajax({
 						type : "POST",
 						url : "/hamburguer/remove/" + hamburguerId + "/"
 								+ ingredientId,
@@ -84,20 +96,17 @@
 			<h2>Lista dos Ingredientes</h2>
 			<table class="table table-striped">
 				<tr>
-					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
-					<th>Editar Preço</th>
+					<th>Editar Pre&ccedil;o</th>
 				</tr>
 				<tr th:each="ingredient : ${ingredients}">
-					<td th:text="${ingredient.id}"><a
-						href="/product/${product.id}">Id</a></td>
 					<td th:text="${ingredient.description}">Descrição</td>
 					<td th:text="${'R$: ' + ingredient.price}">Preço</td>
-				
+
 					<td>
 						<button
-							th:onclick="'javascript:retrieveHamburguerEdit(' + ${hamburguer.id} + ')'"
+							th:onclick="'javascript:editIngredientPriceAjaxPost(' + ${ingredient.id} + ')'"
 							class="btn btn-success btn-lg">Editar</button>
 					</td>
 				</tr>
@@ -106,14 +115,11 @@
 			<h2>Lista dos Hamburgueres</h2>
 			<table class="table table-striped">
 				<tr>
-					<th>Id</th>
 					<th>Descri&ccedil;&atilde;o</th>
 					<th>Pre&ccedil;o</th>
 					<th>Editar Lanche</th>
 				</tr>
 				<tr th:each="hamburguer : ${burguers}">
-					<td th:text="${hamburguer.id}"><a
-						href="/product/${product.id}">Id</a></td>
 					<td th:text="${hamburguer.description}">Descrição</td>
 					<td th:text="${'R$: ' + hamburguer.price}">Preço</td>
 					<td>
