@@ -35,6 +35,8 @@ ehthumbs.db
 Thumbs.db
 
 .project
+.settings
+bin
 .classpath
 .idea
 *.iml
